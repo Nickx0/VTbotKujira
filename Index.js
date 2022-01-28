@@ -13,6 +13,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 client.on('interactionCreate', async interaction => {
+	console.log(`${interaction.user.tag} ejecuto el comando ${interaction.commandName} en #${interaction.channel.name}.`);
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
@@ -23,7 +24,7 @@ client.on('interactionCreate', async interaction => {
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await interaction.reply({ content: 'Hubo un error mientras se ejecutaba este comando!', ephemeral: true });
 	}
 });
 
